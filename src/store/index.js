@@ -18,6 +18,7 @@ export const store = new Vuex.Store({
       try {
         const { data } = await axios.post("/api/login", payload);
         axios.defaults.headers["Authorization"] = "Bearer " + data.token;
+        localStorage.setItem("token", data.token);
         commit("setUser", data.user);
       } catch (err) {
         console.log(err);
@@ -27,6 +28,7 @@ export const store = new Vuex.Store({
       try {
         await axios.post("/api/logout");
         axios.defaults.headers["Authorization"] = "";
+        localStorage.clear();
         commit("setUser", {});
       } catch (err) {
         console.log(err);
