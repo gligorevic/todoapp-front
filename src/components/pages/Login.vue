@@ -42,8 +42,8 @@ export default {
       this.errors = {};
       if (!this.email.trim()) this.errors.email = "Email is required";
       if (!this.password) this.errors.password = "Password is required";
-      
-      this.$store.dispatch('signUserIn', {email: this.email, password: this.password})
+      this.$store.dispatch('signUserIn', {email: this.email, password: this.password}).then(() => !!Object.keys(this.$store.getters.user).length && this.$router.push("/todos"));
+
     },
   },
 };
@@ -63,7 +63,7 @@ export default {
 .formCard {
   min-width: 46%;
   padding: 0 60px;
-  margin-top: 30px;
+  margin-top: 10rem;
 }
 
 button {

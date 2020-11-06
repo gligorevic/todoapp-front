@@ -17,7 +17,17 @@ export const store = new Vuex.Store({
     async signUserIn({ commit }, payload) {
       try {
         const { data } = await axios.post("/api/login", payload);
+        axios.defaults.headers["Authorization"] = "Bearer " + data.token;
         commit("setUser", data.user);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async logout({ commit }) {
+      try {
+        await axios.post("/api/logout");
+        axios.defaults.headers["Authorization"] = "";
+        commit("setUser", {});
       } catch (err) {
         console.log(err);
       }
