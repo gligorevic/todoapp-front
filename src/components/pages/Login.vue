@@ -25,7 +25,6 @@
 
 <script>
 import Input from "../Form/Input";
-import axios from "axios";
 
 export default {
   data() {
@@ -43,8 +42,8 @@ export default {
       this.errors = {};
       if (!this.email.trim()) this.errors.email = "Email is required";
       if (!this.password) this.errors.password = "Password is required";
-      console.log(this.errors, this.email);
-      axios.post("/api/login", {email: this.email, password: this.password}).then(res => console.log(res)).catch(err => console.log(err));
+      
+      this.$store.dispatch('signUserIn', {email: this.email, password: this.password})
     },
   },
 };
