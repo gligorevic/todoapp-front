@@ -37,6 +37,7 @@ export default {
     async addTodo(task) {
       try {
         const { data } = await axios.post("/api/todos", { task });
+        console.log(data);
         this.todos.unshift(data);
       } catch (err) {
         console.log(err);
@@ -53,6 +54,7 @@ export default {
     async updateTodo(todo) {
       try {
         const { data } = await axios.put(`/api/todos/${todo.id}`, todo);
+        console.log(data);
         this.todos = this.todos.map((todo) =>
           todo.id !== data.id ? todo : data
         );

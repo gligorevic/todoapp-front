@@ -1,5 +1,12 @@
 <template>
   <div class="todo">
+    <input
+      type="checkbox"
+      :id="todo.id"
+      v-model="todo.completed"
+      @change="onToggle"
+    />
+    <label :for="todo.id" class="todo__completed"></label>
     <p class="todo__task" v-if="!editMode">
       {{ todo.task }}
     </p>
@@ -57,6 +64,9 @@ export default {
     onUpdate() {
       this.updateTodo({ ...this.todo, task: this.editedTask });
       this.editMode = false;
+    },
+    onToggle() {
+      this.updateTodo({ ...this.todo, completed: this.todo.completed });
     },
   },
 };
@@ -116,6 +126,12 @@ export default {
 
     &--clear {
       color: black;
+    }
+  }
+
+  &__completed {
+    &::before {
+      border: 2px solid #fff;
     }
   }
 }
