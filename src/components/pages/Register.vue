@@ -69,8 +69,8 @@ export default {
             Object.keys(this.$store.getters.user).length !== 0 &&
               this.$router.push("/todos");
           } else if(err?.response?.data) {
-            console.log(err.response.data);
-            this.errors = err.response.data;
+            console.log(err.response.data.errors);
+            this.errors = err.response.data.errors;
             this.$forceUpdate;
           }
       }
