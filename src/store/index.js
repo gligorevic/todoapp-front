@@ -22,6 +22,19 @@ export const store = new Vuex.Store({
         commit("setUser", data.user);
       } catch (err) {
         console.log(err);
+        return err;
+      }
+    },
+    async signUserUp({ commit }, payload) {
+      try {
+        console.log(payload);
+        const { data } = await axios.post("/api/register", payload);
+        axios.defaults.headers["Authorization"] = "Bearer " + data.token;
+        localStorage.setItem("token", data.token);
+        commit("setUser", data.user);
+      } catch (err) {
+        console.log(err);
+        return err;
       }
     },
     async logout({ commit }) {

@@ -1,12 +1,12 @@
 <template>
     <div>
-        Todos
+        {{todo.text}}
     </div>
 </template>
 
 <script>
 export default {
-    
+    props: ['todo']
 }
 </script>
 
