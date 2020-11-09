@@ -165,6 +165,7 @@ export default {
   margin: 10px auto;
   margin-top: 25px;
   padding-bottom: 3px;
+  animation: enterIn 0.7s ease-in-out 1s both;
 
   &--heigh {
     color: #ef9a9a;
@@ -194,6 +195,18 @@ export default {
   100% {
     opacity: 1;
     transform: translate(0);
+  }
+}
+
+@keyframes enterIn {
+  0% {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
   }
 }
 </style>
