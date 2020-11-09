@@ -62,7 +62,12 @@ export default {
       this.deleteTodo(this.todo.id);
     },
     onUpdate() {
-      this.updateTodo({ ...this.todo, task: this.editedTask });
+      this.updateTodo({ ...this.todo, task: this.editedTask }).then((err) => {
+        if (err) {
+          this.editedTask = this.todo.task;
+        }
+      });
+
       this.editMode = false;
     },
     onToggle() {

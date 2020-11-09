@@ -119,6 +119,7 @@ export default {
         this.splitTodos();
       } catch (err) {
         console.log(err);
+        return err;
       }
     },
     async updateLists(list) {
