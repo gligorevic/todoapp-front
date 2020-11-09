@@ -91,8 +91,11 @@ export default {
     },
     async addTodo(task) {
       try {
-        const { data } = await axios.post("/api/todos", { task });
-        this.todos.unshift(data);
+        const { data } = await axios.post("/api/todos", {
+          task,
+          order: this.todosLow.length,
+        });
+        this.todos.push(data);
         this.splitTodos();
       } catch (err) {
         console.log(err);
@@ -118,29 +121,51 @@ export default {
         console.log(err);
       }
     },
-    async changeToLow(evt) {
+    async updateLists(list) {
+      await axios.put(`/api/multiple/todos`, {
+        todos: list,
+      });
+    },
+    syncTodos() {
+      this.todos = [...this.todosHeigh, ...this.todosMedium, ...this.todosLow];
+    },
+    changeToLow(evt) {
       if (evt.added) {
         evt.added.element.priority = "low";
-        this.updateTodo({ ...evt.added.element });
       }
+      this.todosLow = this.todosLow.map((todo, i) => ({ ...todo, order: i }));
+      this.updateLists(this.todosLow);
+      this.syncTodos();
     },
+
     changeToMedium(evt) {
       if (evt.added) {
         evt.added.element.priority = "medium";
-        this.updateTodo({ ...evt.added.element });
       }
+      this.todosMedium = this.todosMedium.map((todo, i) => ({
+        ...todo,
+        order: i,
+      }));
+      this.updateLists(this.todosMedium);
+      this.syncTodos();
     },
+
     changeToHeigh(evt) {
       if (evt.added) {
         evt.added.element.priority = "heigh";
-        this.updateTodo({ ...evt.added.element });
       }
+
+      this.todosHeigh = this.todosHeigh.map((todo, i) => ({
+        ...todo,
+        order: i,
+      }));
+      this.updateLists(this.todosHeigh);
+      this.syncTodos();
     },
   },
 
   async created() {
     try {
-      console.log("fetching");
       const { data } = await axios.get("/api/todos");
       this.todos = data;
       this.splitTodos();
