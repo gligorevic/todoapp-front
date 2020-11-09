@@ -4,17 +4,17 @@
       :class="{ 'todo-animated': animate }"
       :addTodo="addTodo"
     ></app-add-todo>
-    <h5 class="priority-mark priority-mark--heigh">Heigh priority!</h5>
+    <h5 class="priority-mark priority-mark--high">High priority!</h5>
     <draggable
       v-model="todos"
       @start="drag = true"
       @end="drag = false"
       group="todos"
-      :list="todosHeigh"
-      @change="changeToHeigh"
+      :list="todosHigh"
+      @change="changeToHigh"
     >
       <app-todo
-        v-for="(todo, index) in todosHeigh"
+        v-for="(todo, index) in todosHigh"
         :key="todo.id"
         :todo="todo"
         :style="{ animationDelay: index * 0.02 + 's', color: 'white' }"
@@ -77,7 +77,7 @@ export default {
       todos: [],
       todosLow: [],
       todosMedium: [],
-      todosHeigh: [],
+      todosHigh: [],
       animate: true,
     };
   },
@@ -87,7 +87,7 @@ export default {
       this.todosMedium = this.todos.filter(
         (todo) => todo.priority === "medium"
       );
-      this.todosHeigh = this.todos.filter((todo) => todo.priority === "heigh");
+      this.todosHigh = this.todos.filter((todo) => todo.priority === "high");
     },
     async addTodo(task) {
       try {
@@ -127,7 +127,7 @@ export default {
       });
     },
     syncTodos() {
-      this.todos = [...this.todosHeigh, ...this.todosMedium, ...this.todosLow];
+      this.todos = [...this.todosHigh, ...this.todosMedium, ...this.todosLow];
     },
     changeToLow(evt) {
       if (evt.added) {
@@ -150,16 +150,16 @@ export default {
       this.syncTodos();
     },
 
-    changeToHeigh(evt) {
+    changeToHigh(evt) {
       if (evt.added) {
-        evt.added.element.priority = "heigh";
+        evt.added.element.priority = "high";
       }
 
-      this.todosHeigh = this.todosHeigh.map((todo, i) => ({
+      this.todosHigh = this.todosHigh.map((todo, i) => ({
         ...todo,
         order: i,
       }));
-      this.updateLists(this.todosHeigh);
+      this.updateLists(this.todosHigh);
       this.syncTodos();
     },
   },
@@ -192,7 +192,7 @@ export default {
   padding-bottom: 3px;
   animation: enterIn 0.7s ease-in-out 1s both;
 
-  &--heigh {
+  &--high {
     color: #ef9a9a;
     border-bottom: 2px solid#ef9a9a;
   }
