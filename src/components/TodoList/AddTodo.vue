@@ -6,7 +6,7 @@
         <label for="task">Task</label>
       </div>
       <button type="submit">
-        <i class="material-icons small">send</i>
+        <i class="material-icons small blue-text">send</i>
       </button>
     </form>
   </div>
