@@ -6,7 +6,7 @@
         <label for="task">Task</label>
       </div>
       <button type="submit">
-        <i class="material-icons small blue-text">send</i>
+        <i class="material-icons blue-text">send</i>
       </button>
     </form>
   </div>
@@ -22,8 +22,10 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.addTodo(this.task);
-      this.task = "";
+      if (this.task.length > 0) {
+        this.addTodo(this.task);
+        this.task = "";
+      }
     },
   },
 };
@@ -35,13 +37,13 @@ export default {
   background: rgba(255, 255, 255, 0.966);
   margin: 0 auto;
   border-radius: 3px;
-  padding-top: 10px;
-  margin-top: 30px;
+  padding-top: 1rem;
+  margin-top: 3rem;
 
   &__form {
     display: flex;
     align-items: center;
-    margin-left: 20px;
+    margin-left: 2rem;
 
     div {
       display: inline-block;
@@ -51,7 +53,11 @@ export default {
     button {
       border: none;
       background: none;
-      margin: 0 10px;
+      margin: 0 1rem;
+
+      i {
+        font-size: 3.2rem !important;
+      }
     }
   }
 }

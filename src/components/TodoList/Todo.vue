@@ -24,19 +24,19 @@
         class="todo__icon todo__icon--delete"
         @click="onDelete"
         v-if="!editMode"
-        ><i class="material-icons small">delete</i></span
+        ><i class="material-icons">delete</i></span
       >
       <span
         class="todo__icon todo__icon--edit"
         v-if="!editMode"
         @click="editMode = true"
-        ><i class="material-icons small">edit</i></span
+        ><i class="material-icons">edit</i></span
       >
       <span
         class="todo__icon todo__icon--clear"
-        @click="editMode = false"
+        @click="onDiscard"
         v-if="editMode"
-        ><i class="material-icons small">clear</i></span
+        ><i class="material-icons">clear</i></span
       >
       <span
         class="todo__icon todo__icon--check"
@@ -62,16 +62,22 @@ export default {
       this.deleteTodo(this.todo.id);
     },
     onUpdate() {
-      this.updateTodo({ ...this.todo, task: this.editedTask }).then((err) => {
-        if (err) {
-          this.editedTask = this.todo.task;
-        }
-      });
+      if (this.editedTask.length > 0) {
+        this.updateTodo({ ...this.todo, task: this.editedTask }).then((err) => {
+          if (err) {
+            this.editedTask = this.todo.task;
+          }
+        });
 
-      this.editMode = false;
+        this.editMode = false;
+      }
     },
     onToggle() {
       this.updateTodo({ ...this.todo, completed: this.todo.completed });
+    },
+    onDiscard() {
+      this.editMode = false;
+      this.editedTask = this.todo.task;
     },
   },
 };
@@ -81,10 +87,10 @@ export default {
 .todo {
   width: 80%;
   background: #f1f1f173;
-  min-height: 60px;
-  margin: 5px auto;
+  min-height: 6rem;
+  margin: 0.5rem auto;
 
-  padding: 1px 25px;
+  padding: 1px 2.5rem;
   border: 1px solid #f1f1f1be;
   border-radius: 3px;
   display: flex;
@@ -115,7 +121,11 @@ export default {
   &__icon {
     float: right;
     cursor: pointer;
-    margin-left: 5px;
+    margin-left: 0.5rem;
+
+    i {
+      font-size: 3.2rem !important;
+    }
 
     &--delete {
       color: crimson;

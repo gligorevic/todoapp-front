@@ -16,17 +16,10 @@ export default {
 </script>
 
 <style lang="scss">
-input {
-  &:focus {
-    border-bottom: 1px solid #42a5f5 !important;
-    box-shadow: 0 1px 0 0 #42a5f5 !important;
-  }
-}
+@import "./scss/base/base";
+@import "./scss/base/typography";
+@import "./scss/base/animations";
+@import "./scss/base/utilities";
 
-body {
-  background-image: linear-gradient(to top right, #11cdef, #2196f3);
-  background-size: cover;
-  background-repeat: no-repeat;
-  min-height: 100vh;
-}
+@import "./scss/components/card";
 </style>

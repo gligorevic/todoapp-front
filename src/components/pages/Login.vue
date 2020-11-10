@@ -1,7 +1,7 @@
 <template>
-  <div class="container center">
-    <div class="row card formCard">
-      <h1 class="addMargin">Sign in</h1>
+  <div class="container u-center-childs center">
+    <div class="row card">
+      <h1 class="u-m-top-lg u-m-bottom-md heading-primary">Sign in</h1>
       <form class="col s12" @submit.prevent="onSubmit">
         <app-input
           label="Email address"
@@ -57,46 +57,11 @@ export default {
         }
       }
     },
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.container {
-   perspective: 1000px;
-}
-
-@keyframes rotateIn {
-  0% {
-    opacity: 0.1;
-  }
-  20% {
-    transform: translateY(-15px) scale(1.05);
-  }
-  
-  100% {
-    opacity: 1;
-    transform: translate(0);
-  }
-}
-
-.center {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.addMargin {
-  margin-top: 60px;
-  margin-bottom: 40px;
-}
-.formCard {
-  min-width: 46%;
-  padding: 0 60px;
-  margin-top: 10rem;
-  animation: rotateIn .6s ease-in-out;
-}
-
 button {
   margin-bottom: 3rem;
   margin-top: 2rem;
